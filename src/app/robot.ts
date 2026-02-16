@@ -1,0 +1,15 @@
+import type { MetadataRoute } from 'next'
+
+import { siteMetadata } from './metadata'
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: ['/'],
+      disallow: [''],
+    },
+    host: `${siteMetadata.metadataBase}`,
+    sitemap: `${siteMetadata.metadataBase}/sitemap.xml`,
+  }
+}
