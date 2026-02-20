@@ -1,2 +1,20 @@
-pnpm run lint:prettier:check
-pnpm run lint:eslint:check
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔎 Running Prettier check..."
+
+pnpm run lint:prettier:check || (
+  echo "⚡ Prettier failed. Running fix..."
+  pnpm run lint:prettier:fix
+)
+
+echo "🔎 Running ESLint check..."
+
+pnpm run lint:eslint:check || (
+  echo "⚡ ESLint failed. Running fix..."
+  pnpm run lint:eslint:fix
+)
+
+echo "🔁 Re-checking..."
+
+pnpm run lint:prettier:check && pnpm run lint:eslint:check || exit 1
