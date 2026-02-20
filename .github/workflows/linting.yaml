@@ -21,8 +21,8 @@ jobs:
       - name: ⚙️ Setup Node v22
         uses: actions/setup-node@v4
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: 🔍 Check Prettier formatting
         run: pnpm run lint:check
@@ -45,8 +45,8 @@ jobs:
       - name: ⚙️ Setup Node v22
         uses: actions/setup-node@v4
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: 🔍 Check ESlint formatting
         run: pnpm run lint
