@@ -1,20 +1,14 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+pnpm run lint:prettier:check || PRETTIER_FAILED=1
+pnpm run lint:eslint:check || ESLINT_FAILED=1
 
-echo "🔎 Running Prettier check..."
+if [ "$PRETTIER_FAILED" = "1" ] || [ "$ESLINT_FAILED" = "1" ]; then
+  echo "⚡ Running auto-fix..."
 
-pnpm run lint:prettier:check || (
-  echo "⚡ Prettier failed. Running fix..."
   pnpm run lint:prettier:fix
-)
-
-echo "🔎 Running ESLint check..."
-
-pnpm run lint:eslint:check || (
-  echo "⚡ ESLint failed. Running fix..."
   pnpm run lint:eslint:fix
-)
 
-echo "🔁 Re-checking..."
+  echo "🔁 Re-checking..."
 
-pnpm run lint:prettier:check && pnpm run lint:eslint:check || exit 1
+  pnpm run lint:prettier:check || exit 1
+  pnpm run lint:eslint:check || exit 1
+fi
