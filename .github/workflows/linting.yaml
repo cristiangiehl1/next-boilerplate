@@ -25,7 +25,7 @@ jobs:
           cache: 'pnpm'
 
       - name: 🔍 Check Prettier formatting
-        run: pnpm run lint:check
+        run: pnpm run lint:prettier:check
 
   eslint:
     name: Eslint
@@ -49,4 +49,4 @@ jobs:
           cache: 'pnpm'
 
       - name: 🔍 Check ESlint formatting
-        run: pnpm run lint
+        run: pnpm run lint:eslint:check
