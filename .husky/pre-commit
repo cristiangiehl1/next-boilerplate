@@ -1,14 +1,1 @@
-pnpm run lint:prettier:check || PRETTIER_FAILED=1
-pnpm run lint:eslint:check || ESLINT_FAILED=1
-
-if [ "$PRETTIER_FAILED" = "1" ] || [ "$ESLINT_FAILED" = "1" ]; then
-  echo "⚡ Running auto-fix..."
-
-  pnpm run lint:prettier:fix
-  pnpm run lint:eslint:fix
-
-  echo "🔁 Re-checking..."
-
-  pnpm run lint:prettier:check || exit 1
-  pnpm run lint:eslint:check || exit 1
-fi
+pnpm exec lint-staged 
