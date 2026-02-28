@@ -84,7 +84,7 @@ export default function AuthLayout({
         </header>
 
         {/* Main content */}
-        <main className='relative z-10 flex flex-1 items-center justify-center px-10 py-12'>
+        <main className='relative z-10 flex flex-1 items-center justify-center px-10 py-10'>
           <div className='w-full max-w-95'>
             {/* Decorative line above */}
             <div className='mb-8 flex items-center gap-4'>
