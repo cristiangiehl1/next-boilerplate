@@ -1,0 +1,9 @@
+services:
+  database:
+    container_name: "next-boirleplate"
+    image: "postgres:16.0-alpine3.18"
+    env_file:
+      - ../../.env.development
+    ports:
+      # HOST:CONTAINER (DEFAULT POSTGRES VALUE)
+      - "5555:5432"
