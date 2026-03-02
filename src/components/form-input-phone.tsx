@@ -3,11 +3,10 @@
 import { type InputHTMLAttributes, useId } from 'react'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 
-import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 import { Label } from './ui/label'
-import { PhoneInput } from './ui/phone-input'
+import { type CountrySelectProps, PhoneInput } from './ui/phone-input'
 
 interface FormInputProps<
   T extends FieldValues,
@@ -17,6 +16,7 @@ interface FormInputProps<
   label: string
   description?: string
   containerClassName?: string
+  countrySelectProps?: Partial<CountrySelectProps>
 }
 
 export function FormInputPhone<T extends FieldValues>({
@@ -27,6 +27,7 @@ export function FormInputPhone<T extends FieldValues>({
   className,
   containerClassName,
   disabled,
+  countrySelectProps,
   ...props
 }: FormInputProps<T>) {
   const inputId = useId()
@@ -63,6 +64,7 @@ export function FormInputPhone<T extends FieldValues>({
               aria-invalid={hasError}
               aria-describedby={describedBy}
               defaultCountry='BR'
+              countrySelectProps={{ ...countrySelectProps, hasError }}
               className={cn(
                 hasError && 'border-destructive focus-visible:ring-destructive',
                 className

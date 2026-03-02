@@ -83,7 +83,7 @@ export function ForgotPasswordForm() {
 
           <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
             {/* EMAIL */}
-            <TabsContent value='email' className='space-y-6'>
+            <TabsContent value='email'>
               <FormInput
                 control={control}
                 name='email'
@@ -95,9 +95,12 @@ export function ForgotPasswordForm() {
             </TabsContent>
 
             {/* PHONE */}
-            <TabsContent value='phone' className='space-y-6'>
+            <TabsContent value='phone'>
               <FormInputPhone
                 control={control}
+                countrySelectProps={{
+                  disabled: true,
+                }}
                 name='phone'
                 label='Celular'
                 description='Digite o celular vinculado à sua conta'

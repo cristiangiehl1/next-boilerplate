@@ -70,11 +70,12 @@ InputComponent.displayName = 'InputComponent'
 
 type CountryEntry = { label: string; value: RPNInput.Country | undefined }
 
-type CountrySelectProps = {
+export type CountrySelectProps = {
   disabled?: boolean
   value: RPNInput.Country
   options: CountryEntry[]
   onChange: (country: RPNInput.Country) => void
+  hasError: boolean
 }
 
 export const CountrySelect = ({
@@ -82,6 +83,7 @@ export const CountrySelect = ({
   value: selectedCountry,
   options: countryList,
   onChange,
+  hasError,
 }: CountrySelectProps) => {
   const scrollAreaRef = React.useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = React.useState('')
@@ -101,7 +103,10 @@ export const CountrySelect = ({
         <Button
           type='button'
           variant='outline'
-          className='flex gap-1 rounded-s-lg rounded-e-none border-r-0 px-3 focus:z-10'
+          className={cn(
+            'flex gap-1 rounded-s-lg rounded-e-none border-r-0 px-3 focus:z-10',
+            hasError ? 'border-destructive! border' : ''
+          )}
           disabled={disabled}>
           <FlagComponent
             country={selectedCountry}
