@@ -1,7 +1,7 @@
 import { dehydrate, Hydrate } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 
-import { getQueryClient } from '@/app/lib/tanstack-query'
+import { getQueryClient } from '@/lib/tanstack-query'
 
 import { getPosts } from './getPosts'
 import { Posts } from './posts'

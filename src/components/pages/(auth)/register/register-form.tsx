@@ -7,10 +7,6 @@ import { useForm } from 'react-hook-form'
 import { BsPerson } from 'react-icons/bs'
 import { MdEmail } from 'react-icons/md'
 
-import {
-  type RegisterFormData,
-  registerSchema,
-} from '@/app/schemas/(auth)/register'
 import { FormInput } from '@/components/form-input'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
@@ -21,6 +17,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  type RegisterFormData,
+  registerSchema,
+} from '@/schemas/(auth)/register'
 
 export function RegisterForm() {
   // hooks

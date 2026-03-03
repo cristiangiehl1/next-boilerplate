@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { MdEmail } from 'react-icons/md'
 
-import { type LoginFormData, loginSchema } from '@/app/schemas/(auth)/login'
 import { FormInput } from '@/components/form-input'
 import { FormSubmitButton } from '@/components/form-submit-button'
 import { Button } from '@/components/ui/button'
@@ -17,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { type LoginFormData, loginSchema } from '@/schemas/(auth)/login'
 
 export function LoginForm() {
   // hooks

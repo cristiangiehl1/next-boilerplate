@@ -7,11 +7,6 @@ import { useForm } from 'react-hook-form'
 import { FaPhone } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 
-import {
-  forgotPasswordEmailSchema,
-  type ForgotPasswordFormData,
-  forgotPasswordPhoneSchema,
-} from '@/app/schemas/(auth)/forgot-password'
 import { FormInput } from '@/components/form-input'
 import { FormInputPhone } from '@/components/form-input-phone'
 import { FormSubmitButton } from '@/components/form-submit-button'
@@ -24,6 +19,11 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+  forgotPasswordEmailSchema,
+  type ForgotPasswordFormData,
+  forgotPasswordPhoneSchema,
+} from '@/schemas/(auth)/forgot-password'
 
 export function ForgotPasswordForm() {
   const [tab, setTab] = useState<'email' | 'phone'>('email')

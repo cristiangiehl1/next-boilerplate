@@ -6,10 +6,12 @@ import { InternalServerError } from '@/infra/errors'
 
 const env = {
   BASE_API_URL: process.env.BASE_API_URL,
+  DATABASE_URL: process.env.DATABASE_URL,
 }
 
 const serverEnvSchema = z.object({
   BASE_API_URL: z.url().nonempty(),
+  DATABASE_URL: z.url().nonempty(),
 })
 
 const { success, data, error } = serverEnvSchema.safeParse(env)
