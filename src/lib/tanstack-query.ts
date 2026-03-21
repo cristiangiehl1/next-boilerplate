@@ -1,6 +1,6 @@
 import {
   type DefaultOptions,
-  isServer,
+  environmentManager,
   QueryClient,
 } from '@tanstack/react-query'
 import { cache } from 'react'
@@ -9,7 +9,7 @@ const defaultOptions: DefaultOptions = {
   queries: {
     refetchOnWindowFocus: false,
     retry: false,
-    staleTime: 60 * 1000, // 1 min
+    staleTime: 5 * 60 * 1000, // 5 min
   },
 }
 
@@ -24,7 +24,7 @@ const getServerQueryClient = cache(() => makeQueryClient())
 
 export function getQueryClient(): QueryClient {
   // Server: always make a new query client
-  if (isServer) {
+  if (environmentManager.isServer()) {
     return getServerQueryClient()
   }
 

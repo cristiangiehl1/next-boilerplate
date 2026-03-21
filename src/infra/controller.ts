@@ -1,5 +1,5 @@
 import { serialize } from 'cookie'
-import type { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { ZodError } from 'zod'
 
 import { session } from '@/models/session'
@@ -14,10 +14,10 @@ import {
   ValidationError,
 } from './errors'
 
-type errorHandler = (req: Request) => Promise<Response>
+type errorHandler = (req: NextRequest) => Promise<Response>
 
 function handleRouteError(handler: errorHandler) {
-  return async (req: Request) => {
+  return async (req: NextRequest) => {
     try {
       return await handler(req)
     } catch (err) {
@@ -28,11 +28,11 @@ function handleRouteError(handler: errorHandler) {
         err instanceof ForbiddenError ||
         err instanceof ServiceError
       ) {
-        return Response.json(err, { status: err.statusCode })
+        return NextResponse.json(err, { status: err.statusCode })
       }
 
       if (err instanceof UnauthorizedError) {
-        const response = Response.json(err, { status: err.statusCode })
+        const response = NextResponse.json(err, { status: err.statusCode })
         clearSessionCookie(response)
         return response
       }
@@ -40,7 +40,7 @@ function handleRouteError(handler: errorHandler) {
       if (err instanceof ZodError) {
         const parsedZodError = parseZodError(err)
 
-        return Response.json(parsedZodError, {
+        return NextResponse.json(parsedZodError, {
           status: parsedZodError.statusCode,
         })
       }
@@ -63,14 +63,14 @@ function handleRouteError(handler: errorHandler) {
 
       console.error(publicErrorObject)
 
-      return Response.json(publicErrorObject, {
+      return NextResponse.json(publicErrorObject, {
         status: publicErrorObject.statusCode,
       })
     }
   }
 }
 
-export function setSessionCookie(response: Response, token: string) {
+export function setSessionCookie(res: NextResponse, token: string) {
   const serialized = serialize('session_id', token, {
     path: '/',
     httpOnly: true,
@@ -78,10 +78,10 @@ export function setSessionCookie(response: Response, token: string) {
     maxAge: session.EXPIRATION_IN_MILLISECONDS / 1000,
   })
 
-  response.headers.append('Set-Cookie', serialized)
+  res.headers.append('Set-Cookie', serialized)
 }
 
-function clearSessionCookie(response: Response) {
+function clearSessionCookie(res: NextResponse) {
   const serialized = serialize('session_id', 'invalid', {
     path: '/',
     maxAge: -1,
@@ -89,7 +89,7 @@ function clearSessionCookie(response: Response) {
     httpOnly: true, // codigo javascript do client-side nao consegue acessar os cookies marcados com http-only, tambem conhecido como XXS (Cross-Site Scripting)
   })
 
-  response.headers.append('Set-Cookie', serialized)
+  res.headers.append('Set-Cookie', serialized)
 }
 
 function parseZodError(err: ZodError): ValidationError {

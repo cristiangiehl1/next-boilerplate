@@ -4,10 +4,12 @@ import { InternalServerError } from '@/infra/errors'
 
 const env = {
   NEXT_PUBLIC_LOGIN_REDIRECT_URL: process.env.NEXT_PUBLIC_LOGIN_REDIRECT_URL,
+  NEXT_PUBLIC_BASE_API_URL: process.env.NEXT_PUBLIC_BASE_API_URL,
 }
 
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_LOGIN_REDIRECT_URL: z.url().nonempty(),
+  NEXT_PUBLIC_BASE_API_URL: z.url().nonempty(),
 })
 
 const { success, data, error } = clientEnvSchema.safeParse(env)
